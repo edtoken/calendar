@@ -58,6 +58,10 @@ define([
             ) {
                 $('.monthDay').not(this.el).removeClass('show_items');
                 this.$el.toggleClass('show_items');
+
+                var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
+                this.elHiddenItemsWrap.style.top = -top + 'px';
+                
             }
         },
 
@@ -113,6 +117,7 @@ define([
             this.el.innerHTML = _.template(dayTpl)(this.options.modelData);
             this.elCounter = this.el.querySelector('.todosCount');
             this.elItems = this.el.querySelector('.itemsNode');
+            this.elHiddenItemsWrap = this.el.querySelector('.hiddenItemsNodeWrap');
             this.elhiddenItemsNode = this.el.querySelector('.hiddenItemsNode');
             this.elAddForm = this.el.querySelector('.todoAddForm');
             this.$elAddForm = $(this.elAddForm);
@@ -131,6 +136,9 @@ define([
                 this.elhiddenItemsNode.appendChild(TodoView.render().el);
                 this.children.push(TodoView);
             }
+
+            var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
+            this.elHiddenItemsWrap.style.top = -top + 'px';
 
             return this;
         }
