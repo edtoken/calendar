@@ -6,14 +6,10 @@ define([
     'underscore',
     'backbone',
     'localstorage'
-], function(
-    $,
-    _,
-    Backbone
-){
-   var DayModel = Backbone.Model.extend({
-
-   });
+], function ($,
+             _,
+             Backbone) {
+    var DayModel = Backbone.Model.extend({});
 
     return DayModel;
 });

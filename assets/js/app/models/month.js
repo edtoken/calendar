@@ -16,7 +16,9 @@ define([
 
         defaults: {
             date: false,
-            daysArr: [],
+            currentItems: [],
+            prevItems: [],
+            nextItems: [],
             daysCount: 0,
             monthName: '',
             firstDay: 0
@@ -49,7 +51,7 @@ define([
 
                 var dataObjPrev = {};
                 dataObjPrev.month = (this.get('month') === 0) ? 11 : this.get('month') - 1;
-                dataObjPrev.year = (this.get('month') === 0) ? this.get('year') - 1: this.get('year');
+                dataObjPrev.year = (this.get('month') === 0) ? this.get('year') - 1 : this.get('year');
 
                 for (var pi = prevStartDate; pi <= prevMonthDaysCount; pi++) {
 
@@ -91,22 +93,22 @@ define([
 
             }
 
-            data.currentItems.sort(function(a, b){
-                if(a.date < b.date){
+            data.currentItems.sort(function (a, b) {
+                if (a.date < b.date) {
                     return -1;
                 }
                 return 1;
             });
 
-            data.prevItems.sort(function(a, b){
-                if(a.date < b.date){
+            data.prevItems.sort(function (a, b) {
+                if (a.date < b.date) {
                     return -1;
                 }
                 return 1;
             });
 
-            data.nextItems.sort(function(a, b){
-                if(a.date < b.date){
+            data.nextItems.sort(function (a, b) {
+                if (a.date < b.date) {
                     return -1;
                 }
                 return 1;
@@ -115,7 +117,7 @@ define([
             data.items = data.items.concat(data.prevItems, data.currentItems, data.nextItems);
 
             //TODO calc week
-            data.items = data.items.map(function(item, i){
+            data.items = data.items.map(function (item, i) {
                 var week = new Date(item.year, item.month, item.date).getDay();
                 item.dir = (week < 3) ? 0 : 1;
                 return item;

@@ -20,13 +20,13 @@ define([
         tagName: "div",
         className: "monthDay",
 
-        options:{
-            ctrl:false
+        options: {
+            ctrl: false
         },
 
         events: {
             'click': 'clickEvent',
-            'submit':'saveNewItem'
+            'submit': 'saveNewItem'
         },
 
         initialize: function (options) {
@@ -61,8 +61,8 @@ define([
             }
         },
 
-        saveNewItem:function(e){
-            if(e){
+        saveNewItem: function (e) {
+            if (e) {
                 e.preventDefault();
             }
 
@@ -95,9 +95,9 @@ define([
         render: function () {
 
             var items = this.app.collections.todos.where({
-                date:this.options.modelData.date,
-                year:this.options.modelData.year,
-                month:this.options.modelData.month
+                date: this.options.modelData.date,
+                year: this.options.modelData.year,
+                month: this.options.modelData.month
             });
 
             this.options.modelData.count = items.length;
@@ -106,7 +106,7 @@ define([
                 this.el.className += ' disable';
             }
 
-            if(this.options.modelData.dir){
+            if (this.options.modelData.dir) {
                 this.el.className += ' right';
             }
 
@@ -117,16 +117,16 @@ define([
             this.elAddForm = this.el.querySelector('.todoAddForm');
             this.$elAddForm = $(this.elAddForm);
 
-            if(this.children){
-                for(var n in this.children){
+            if (this.children) {
+                for (var n in this.children) {
                     this.children[n].remove();
                 }
             }
 
             this.children = [];
 
-            for(var i in items){
-                var TodoView = new TodoViewClass({model:items[i], parent:this});
+            for (var i in items) {
+                var TodoView = new TodoViewClass({model: items[i], parent: this});
                 this.elItems.appendChild(TodoView.renderTitle().smallEl);
                 this.elhiddenItemsNode.appendChild(TodoView.render().el);
                 this.children.push(TodoView);

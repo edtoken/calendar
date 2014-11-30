@@ -43,7 +43,7 @@ define([
             var self = this;
             this.model.destroy({
                 wait: true,
-                success:function(){
+                success: function () {
                     self.parent.render();
                 }
             })

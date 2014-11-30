@@ -67,8 +67,8 @@ define([
             this.el.innerHTML = _.template(monthTpl)(data);
             this.children = [];
 
-            for(var n in items){
-                var DayView = new DayViewClass({modelData:items[n]});
+            for (var n in items) {
+                var DayView = new DayViewClass({modelData: items[n]});
                 this.el.appendChild(DayView.render().el);
             }
 

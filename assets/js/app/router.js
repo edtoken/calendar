@@ -30,7 +30,7 @@ define([
         openMonth: function (year, month) {
 
             if (year.toString().length !== 4
-                ||!parseInt(year)
+                || !parseInt(year)
                 || !parseInt(month)
                 || (parseInt(month) < 1 || parseInt(month) > 12)
             ) {
@@ -40,7 +40,7 @@ define([
 
             var openDate = new Date(year, month - 1, 1);
 
-            if(isNaN(Date.parse(openDate))){
+            if (isNaN(Date.parse(openDate))) {
                 alert('incorrect data, show console');
                 throw "incorrect data year:" + year + ' month:' + month;
             }
