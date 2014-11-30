@@ -10,7 +10,7 @@ define([
 ], function ($,
              _,
              Backbone,
-             TodoModel) {
+             TodoModelClass) {
 
     /**
      * cleaning local storage
@@ -23,7 +23,7 @@ define([
 
     var IndexCollection = Backbone.Collection.extend({
 
-        model: TodoModel,
+        model: TodoModelClass,
         localStorage: new Backbone.LocalStorage('CalendarAppTask'),
 
         initialize: function () {
@@ -45,11 +45,16 @@ define([
         },
 
         comparator: function (todo) {
-            return parseInt(
-                todo.get('year').toString()
-                + todo.get('month').toString()
-                + todo.get('date').toString()
-            );
+
+            var date = '';
+            var month = todo.get('month').toString();
+            var day= todo.get('date').toString();
+
+            date += todo.get('year').toString();
+            date += (month.length === 1)? '0' + month : month;
+            date += (day.length === 1)? '0' + day : day;
+
+            return parseInt(date);;
         }
 
     });
