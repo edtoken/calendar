@@ -59,9 +59,9 @@ define([
             var items = this.model.get('items');
 
             if (this.children) {
-                this.children.forEach(function (item) {
-                    item.remove();
-                });
+                for(var n in this.children){
+                    this.children[n].remove();
+                }
             }
 
             this.el.innerHTML = _.template(monthTpl)(data);

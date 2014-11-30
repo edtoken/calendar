@@ -122,9 +122,9 @@ define([
             this.$elAddForm = $(this.elAddForm);
 
             if (this.children) {
-                this.children.forEach(function (item) {
-                    item.remove();
-                });
+                for(var n in this.children){
+                    this.children[n].remove();
+                }
             }
 
             this.children = [];
