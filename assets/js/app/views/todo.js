@@ -25,10 +25,6 @@ define([
 
             this.smallEl = document.createElement('li');
             this.smallEl.className = 'todoSmallItem item_' + this.model.cid;
-
-            this.list = options.list;
-            this.node = options.node;
-            //this.$node = $(this.node);
             this.parent = options.parent;
 
             //this.smallElClick = function(){
@@ -36,10 +32,7 @@ define([
             //    this.$node.toggleClass('active');
             //}.bind(this);
 
-            //this.smallEl.addEventListener('click', this.smallElClick);
             this.model.bind('change', this.render, this);
-            this.model.bind('destroy', this.removeCustom, this);
-            this.model.bind('destroy', this.remove, this);
         },
 
         clickTitle: function () {
@@ -47,7 +40,13 @@ define([
         },
 
         clickRemoveTodo: function () {
-            this.model.destroy();
+            var self = this;
+            this.model.destroy({
+                wait: true,
+                success:function(){
+                    self.parent.render();
+                }
+            })
         },
 
         renderTitle: function () {
@@ -62,6 +61,7 @@ define([
         },
 
         removeCustom: function () {
+            //this.parent.elCounter.innerHTML.replace(/[0-9]*/, value);
             this.smallEl.removeEventListener('click', this.smallElClick);
             this.smallEl.remove(this.smallEl.selectedIndex);
         }

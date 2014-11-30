@@ -5,7 +5,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'functions/calendar'
+    'functions/calendar',
+    'localstorage'
 ], function ($,
              _,
              Backbone,
@@ -71,21 +72,21 @@ define([
                 });
             }
 
-            var nextMonthDaysCount = (7 * Math.ceil(data.currentItems.length / 7)) - data.currentItems.length;
+            var nextMonthDaysCount = (7 * Math.ceil((data.prevItems.length + data.currentItems.length) / 7)) - (data.prevItems.length + data.currentItems.length);
             if (nextMonthDaysCount > 0) {
 
                 var dataObjNext = {};
                 dataObjNext.month = (this.get('month') === 11) ? 0 : this.get('month') + 1;
                 dataObjNext.year = (this.get('month') === 11) ? this.get('year') + 1 : this.get('year');
 
-                for (var ni = 1; ni <= nextMonthDaysCount+1; ni++) {
+                for (var ni = 1; ni <= nextMonthDaysCount; ni++) {
 
-                    //data.nextItems.push({
-                    //    hidden: true,
-                    //    date: ni,
-                    //    month: dataObjNext.month,
-                    //    year: dataObjNext.year
-                    //});
+                    data.nextItems.push({
+                        hidden: true,
+                        date: ni,
+                        month: dataObjNext.month,
+                        year: dataObjNext.year
+                    });
                 }
 
             }

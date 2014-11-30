@@ -208,44 +208,32 @@ body {
   &.show_items
   {
     background:#8991a2;
+    color:#fff;
+
+    .todosCount
+    {
+      color:#fff;
+    }
+
     .hiddenItemsNodeWrap
     {
       display: block;
     }
   }
 
-  &.right
-  {
-    .hiddenItemsNodeWrap
-    {
-      right:100%;
-      left:auto;
-
-      &:after,
-      &:before
-      {
-        left:auto;
-      }
-
-      &:before
-      {
-        right:-5px;
-      }
-
-      &:after
-      {
-        right:-4px;
-      }
-    }
-  }
 }
 
 .itemsNode,
-.hiddenItemsNodeWrap {
+.hiddenItemsNode {
   list-style: none;
 }
 
 .itemsNode {
+
+  height: 106px;
+  width:100%;
+  overflow: hidden;
+
   & > li {
 
     cursor: pointer;
@@ -272,14 +260,11 @@ body {
 
 .hiddenItemsNodeWrap {
 
-  width: 278px;
+
   display: none;
-  position: absolute;
   border: 1px solid #d8d8d8;
   background: #f3f3f3;
-  left: 100%;
   z-index: 1;
-  top: 0;
   padding: 9px;
 
   &.active {
@@ -288,27 +273,9 @@ body {
 
   @include border-radius($basic_radius);
 
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    width: 7px;
-    height: 7px;
-    @include rotate(45deg);
-  }
-
-  &:before {
-    z-index: 1;
-    left: -5px;
-    background: #d8d8d8;
-  }
-
-  &:after {
-    z-index: 2;
-    left: -4px;
-    background: #f3f3f3;
+  p
+  {
+    color:#333;
   }
 }
 
