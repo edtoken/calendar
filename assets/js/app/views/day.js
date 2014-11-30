@@ -30,6 +30,7 @@ define([
         },
 
         initialize: function (options) {
+
             var self = this;
             //this.model = new DayModelClass(options.modelData);
             this.options = options;
@@ -38,15 +39,12 @@ define([
             this.app.collections.todos.bind('add', this.addItem, this);
 
             this.$el.keydown(function (e) {
-
                 if (e.ctrlKey) {
                     self.options.ctrl = true;
                 }
-
                 if (e.keyCode === 13 && self.options.ctrl) {
                     self.saveNewItem(false);
                 }
-
                 self.options.ctrl = false;
             });
         },
@@ -61,7 +59,6 @@ define([
 
                 var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
                 this.elHiddenItemsWrap.style.top = -top + 'px';
-
             }
         },
 
@@ -84,6 +81,7 @@ define([
             data.date = this.options.modelData.date;
             data.month = this.options.modelData.month;
             data.year = this.options.modelData.year;
+
             this.app.collections.todos.create(data);
         },
 
@@ -124,9 +122,9 @@ define([
             this.$elAddForm = $(this.elAddForm);
 
             if (this.children) {
-                for (var n in this.children) {
-                    this.children[n].remove();
-                }
+                this.children.forEach(function (item) {
+                    item.remove();
+                });
             }
 
             this.children = [];

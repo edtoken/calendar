@@ -54,7 +54,7 @@ define([
             date += (month.length === 1)? '0' + month : month;
             date += (day.length === 1)? '0' + day : day;
 
-            return parseInt(date);;
+            return parseInt(date);
         }
 
     });

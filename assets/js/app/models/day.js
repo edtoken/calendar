@@ -9,6 +9,7 @@ define([
 ], function ($,
              _,
              Backbone) {
+
     var DayModel = Backbone.Model.extend({});
 
     return DayModel;
