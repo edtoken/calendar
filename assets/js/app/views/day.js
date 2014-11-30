@@ -61,11 +61,12 @@ define([
 
                 var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
                 this.elHiddenItemsWrap.style.top = -top + 'px';
-                
+
             }
         },
 
         saveNewItem: function (e) {
+
             if (e) {
                 e.preventDefault();
             }
@@ -107,15 +108,15 @@ define([
             this.options.modelData.count = items.length;
 
             if (this.options.modelData.hidden) {
-                this.el.className += ' disable';
+                this.$el.addClass('disable');
             }
 
             if (this.options.modelData.dir) {
-                this.el.className += ' right';
+                this.$el.addClass('right');
             }
 
             this.el.innerHTML = _.template(dayTpl)(this.options.modelData);
-            this.elCounter = this.el.querySelector('.todosCount');
+            //this.elCounter = this.el.querySelector('.todosCount');
             this.elItems = this.el.querySelector('.itemsNode');
             this.elHiddenItemsWrap = this.el.querySelector('.hiddenItemsNodeWrap');
             this.elhiddenItemsNode = this.el.querySelector('.hiddenItemsNode');
@@ -130,9 +131,11 @@ define([
 
             this.children = [];
 
-            for (var i in items) {
+            for (var i=0;i<items.length;i++) {
                 var TodoView = new TodoViewClass({model: items[i], parent: this});
-                this.elItems.appendChild(TodoView.renderTitle().smallEl);
+                if(i <= 3){
+                    this.elItems.appendChild(TodoView.renderTitle().smallEl);
+                }
                 this.elhiddenItemsNode.appendChild(TodoView.render().el);
                 this.children.push(TodoView);
             }
