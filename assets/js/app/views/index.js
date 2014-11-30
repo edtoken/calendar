@@ -16,10 +16,8 @@ define([
         el: $('body'),
 
         initialize: function () {
-
             this.children = {};
             this.children.month = new MonthViewClass({parent: this});
-
             this.render();
         },
 

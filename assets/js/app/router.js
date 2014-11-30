@@ -14,7 +14,7 @@ define([
         routes: {
             '': 'index',
             ':year/:month(/)': 'openMonth',
-            '*path': 'defaultActon'
+            '*path': 'defaultAction'
         },
 
         index: function () {
@@ -54,7 +54,7 @@ define([
         },
 
         defaultAction: function () {
-            alert('incorrect route')
+            alert('incorrect route');
             throw "incorrect route";
         }
     });
