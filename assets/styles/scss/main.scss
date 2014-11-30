@@ -16,7 +16,6 @@ body {
 }
 
 .monthViewWrap {
-  width: 1025px;
   margin: 80px auto;
   border: 1px solid #b3b3b3;
 
@@ -131,11 +130,12 @@ body {
   }
 }
 
-.monthWeekItem {
-  float: left;
-  width: 14.2857%;
+.monthWeeksNames {
 
   & > span {
+    box-sizing: border-box;
+    width: 14.2857142857%;
+    float: left;
     height: 28px;
     line-height: 34px;
     font-family: "HelveticaLTStd-Bold";
@@ -156,47 +156,47 @@ body {
     background: linear-gradient(to bottom, #ccced2 0%, #d7dae0 50%, #d1d4db 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccced2', endColorstr='#d1d4db', GradientType=0);
 
+    &:last-child {
+      border-right: 0;
+    }
   }
 
-  &:last-child > span {
-    border-right: 0;
+  &:after {
+    content: "";
+    display: block;
+    clear: left;
   }
 }
 
 .monthDay {
   position: relative;
+  box-sizing: border-box;
+  width: 14.2857142857%;
   height: 145px;
   padding: 9px;
   background: #fff;
   border: solid #e5e5e5;
   border-width: 0 1px 1px 0;
+  float:left;
 
   & .dayInfo {
     marg-bottom: 10px;
 
     & > span {
       display: block;
-      float: left;
     }
 
     & > .todosCount {
-      fotn-size: 12px;
-      width: 80%;
+      font-size: 12px;
       color: #bbbbbb;
     }
 
     & > .date {
+      text-align: right;
       line-height: 23px;
-      width: 20%;
       font-size: 14px;
       color: #000;
       font-family: "HelveticaLTStd-Bold";
-    }
-
-    &:after {
-      content: "";
-      display: block;
-      clear: left;
     }
 
   }
@@ -204,10 +204,44 @@ body {
   &.disable {
     background: #f7f7f7;
   }
+
+  &.show_items
+  {
+    background:#8991a2;
+    .hiddenItemsNodeWrap
+    {
+      display: block;
+    }
+  }
+
+  &.right
+  {
+    .hiddenItemsNodeWrap
+    {
+      right:100%;
+      left:auto;
+
+      &:after,
+      &:before
+      {
+        left:auto;
+      }
+
+      &:before
+      {
+        right:-5px;
+      }
+
+      &:after
+      {
+        right:-4px;
+      }
+    }
+  }
 }
 
 .itemsNode,
-.hiddenItemsNode {
+.hiddenItemsNodeWrap {
   list-style: none;
 }
 
@@ -236,7 +270,7 @@ body {
   }
 }
 
-.hiddenItemsNode {
+.hiddenItemsNodeWrap {
 
   width: 278px;
   display: none;
@@ -332,6 +366,7 @@ body {
 
   input,
   textarea {
+    resize:none;
     margin-top: 3px;
     outline: none;
     padding: 7px;
@@ -340,6 +375,26 @@ body {
     box-sizing: border-box;
     border: 1px solid #e7e7e7;
     display: block;
+    @include border-radius($basic_radius);
+  }
+
+  button
+  {
+    text-align: center;
+    width:100%;
+    font-family: "HelveticaLTStd-Bold";
+    border:0;
+    outline:none;
+    color:#8991a2;
+    height: 28px;
+    line-height: 31px;
+    cursor: pointer;
+    margin-top: 10px;
+
+    &:hover
+    {
+      background: #ccced2;
+    }
     @include border-radius($basic_radius);
   }
 }

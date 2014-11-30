@@ -5,12 +5,12 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/week',
+    'views/day',
     'text!templates/month.html'
 ], function ($,
              _,
              Backbone,
-             WeekViewClass,
+             DayViewClass,
              monthTpl) {
 
     var MonthView = Backbone.View.extend({
@@ -56,7 +56,7 @@ define([
             var data = {};
             data.monthName = this.model.get('monthName');
             data.year = this.model.get('year');
-            var groupItems = this.model.get('groupItems');
+            var items = this.model.get('items');
 
             if (this.children) {
                 this.children.forEach(function (item) {
@@ -67,12 +67,9 @@ define([
             this.el.innerHTML = _.template(monthTpl)(data);
             this.children = [];
 
-            for (var week in groupItems) {
-
-                var WeekView = new WeekViewClass({dates: groupItems[week], week: week});
-                this.children.push(WeekView);
-                this.el.appendChild(WeekView.render().el);
-
+            for(var n in items){
+                var DayView = new DayViewClass({modelData:items[n]});
+                this.el.appendChild(DayView.render().el);
             }
 
             return this;
