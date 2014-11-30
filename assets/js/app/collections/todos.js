@@ -29,18 +29,6 @@ define([
         initialize: function () {
 
             this.fetch({reset: true});
-            /**
-             * add test default item
-             */
-            //var d = {};
-            //d.title = "test title item: #" + this.length;
-            //d.description = 'test descr';
-            //d.month = 10;
-            //d.year = 2014;
-            //d.date = 12;
-            //d.state = 1;
-            //this.add(d);
-            //console.log('save', d, this.at(this.length -1).save());
 
         },
 

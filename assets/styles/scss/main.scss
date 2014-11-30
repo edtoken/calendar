@@ -302,6 +302,7 @@ body {
 .todoWrap .title {
 
   position: relative;
+  overflow: hidden;
   cursor: pointer;
   display: block;
   color: #fff;

@@ -36,7 +36,6 @@ define([
             this.options = options;
             this.options.modelData = options.modelData;
             this.children = {};
-            this.app.collections.todos.bind('add', this.addItem, this);
 
             this.$el.keydown(function (e) {
                 if (e.ctrlKey) {
@@ -47,6 +46,8 @@ define([
                 }
                 self.options.ctrl = false;
             });
+
+            this.app.collections.todos.bind('add', this.addItem, this);
         },
 
         clickEvent: function (e) {
@@ -81,6 +82,11 @@ define([
             data.date = this.options.modelData.date;
             data.month = this.options.modelData.month;
             data.year = this.options.modelData.year;
+
+            data.title = data.description.substr(0,10);
+            if(data.title.length == 10){
+                data.title += '...';
+            }
 
             this.app.collections.todos.create(data);
         },
