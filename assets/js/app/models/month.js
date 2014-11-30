@@ -16,9 +16,10 @@ define([
 
         defaults: {
             date: false,
-            currentItems: [],
-            prevItems: [],
-            nextItems: [],
+            days:[],
+            currentDays: [],
+            prevDays: [],
+            nextDays: [],
             daysCount: 0,
             monthName: '',
             firstDay: 0
@@ -30,12 +31,11 @@ define([
 
         calcData: function () {
 
-            var self = this;
             var data = {};
-            data.items = [];
-            data.currentItems = [];
-            data.prevItems = [];
-            data.nextItems = [];
+            data.days = [];
+            data.currentDays = [];
+            data.prevDays = [];
+            data.nextDays = [];
 
             data.daysCount = 33 - new Date(this.get('year'), this.get('month'), 33).getDate();
             data.monthName = CalendarFunc.getMonthNameByNum(this.get('month'));
@@ -55,7 +55,7 @@ define([
 
                 for (var pi = prevStartDate; pi <= prevMonthDaysCount; pi++) {
 
-                    data.prevItems.push({
+                    data.prevDays.push({
                         hidden: true,
                         date: pi,
                         month: dataObjPrev.month,
@@ -67,14 +67,14 @@ define([
 
             for (var i = 1; i <= data.daysCount; i++) {
 
-                data.currentItems.push({
+                data.currentDays.push({
                     date: i,
                     month: this.get('month'),
                     year: this.get('year')
                 });
             }
 
-            var nextMonthDaysCount = (7 * Math.ceil((data.prevItems.length + data.currentItems.length) / 7)) - (data.prevItems.length + data.currentItems.length);
+            var nextMonthDaysCount = (7 * Math.ceil((data.prevDays.length + data.currentDays.length) / 7)) - (data.prevDays.length + data.currentDays.length);
             if (nextMonthDaysCount > 0) {
 
                 var dataObjNext = {};
@@ -83,7 +83,7 @@ define([
 
                 for (var ni = 1; ni <= nextMonthDaysCount; ni++) {
 
-                    data.nextItems.push({
+                    data.nextDays.push({
                         hidden: true,
                         date: ni,
                         month: dataObjNext.month,
@@ -93,31 +93,31 @@ define([
 
             }
 
-            data.currentItems.sort(function (a, b) {
+            data.currentDays.sort(function (a, b) {
                 if (a.date < b.date) {
                     return -1;
                 }
                 return 1;
             });
 
-            data.prevItems.sort(function (a, b) {
+            data.prevDays.sort(function (a, b) {
                 if (a.date < b.date) {
                     return -1;
                 }
                 return 1;
             });
 
-            data.nextItems.sort(function (a, b) {
+            data.nextDays.sort(function (a, b) {
                 if (a.date < b.date) {
                     return -1;
                 }
                 return 1;
             });
 
-            data.items = data.items.concat(data.prevItems, data.currentItems, data.nextItems);
+            data.days = data.days.concat(data.prevDays, data.currentDays, data.nextDays);
 
             //TODO calc week
-            data.items = data.items.map(function (item, i) {
+            data.days = data.days.map(function (item) {
                 var week = new Date(item.year, item.month, item.date).getDay();
                 item.dir = (week < 3) ? 0 : 1;
                 return item;

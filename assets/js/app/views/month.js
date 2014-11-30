@@ -56,7 +56,7 @@ define([
             var data = {};
             data.monthName = this.model.get('monthName');
             data.year = this.model.get('year');
-            var items = this.model.get('items');
+            var days = this.model.get('days');
 
             if (this.children) {
                 for(var n in this.children){
@@ -67,8 +67,8 @@ define([
             this.el.innerHTML = _.template(monthTpl)(data);
             this.children = [];
 
-            for (var n in items) {
-                var DayView = new DayViewClass({modelData: items[n]});
+            for (var n in days) {
+                var DayView = new DayViewClass({modelData: days[n]});
                 this.el.appendChild(DayView.render().el);
             }
 
