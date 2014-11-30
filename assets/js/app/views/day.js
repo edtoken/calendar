@@ -118,7 +118,7 @@ define([
             this.$elAddForm = $(this.elAddForm);
 
             for(var i in items){
-                var TodoView = new TodoViewClass({modelData:items[i]});
+                var TodoView = new TodoViewClass({model:items[i]});
                 this.elItems.appendChild(TodoView.renderTitle().smallEl);
             }
 

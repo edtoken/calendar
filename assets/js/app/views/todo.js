@@ -5,12 +5,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'models/todo',
     'text!templates/todo.html'
 ], function ($,
              _,
              Backbone,
-             TodoModelClass,
              todoTpl) {
 
     var TodoView = Backbone.View.extend({
@@ -25,8 +23,6 @@ define([
 
         initialize: function (options) {
 
-            this.model = new TodoModelClass(options.modelData);
-            console.log('a', options);
             this.smallEl = document.createElement('li');
             this.smallEl.className = 'todoSmallItem item_' + this.model.cid;
 
