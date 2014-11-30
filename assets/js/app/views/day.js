@@ -51,9 +51,9 @@ define([
 
         clickEvent: function (e) {
             if (e.target === this.el
-                || e.target.className.indexOf('todoSmallItem') >= 0
                 || e.target.className.indexOf('itemsNode') >= 0
             ) {
+
                 $('.monthDay').not(this.el).removeClass('show_items');
                 this.$el.toggleClass('show_items');
 
@@ -131,7 +131,7 @@ define([
 
             for (var i=0;i<items.length;i++) {
                 var TodoView = new TodoViewClass({model: items[i], parent: this});
-                if(i <= 3){
+                if(i < 3){
                     this.elItems.appendChild(TodoView.renderTitle().smallEl);
                 }
                 this.elhiddenItemsNode.appendChild(TodoView.render().el);

@@ -14,7 +14,7 @@ define([
     var TodoView = Backbone.View.extend({
 
         tagName: 'li',
-        className: "todoWrap disable",
+        className: "todoWrap",
 
         events: {
             "click .title": "clickTitle",
@@ -24,19 +24,33 @@ define([
         initialize: function (options) {
 
             this.smallEl = document.createElement('li');
+            this.$smallEl = $(this.smallEl);
+
             this.smallEl.className = 'todoSmallItem item_' + this.model.cid;
             this.parent = options.parent;
 
-            //this.smallElClick = function(){
-            //    //todo need open task
-            //    this.$node.toggleClass('active');
-            //}.bind(this);
+            this.smallElClick = function(){
+
+                $('.monthDay').not(this.parent.el).removeClass('show_items');
+
+
+                if(this.parent.el.className.indexOf('show_items') < 0){
+                    var top = (this.parent.elHiddenItemsWrap.offsetHeight - this.parent.el.offsetHeight) / 2;
+                    this.parent.elHiddenItemsWrap.style.top = top + 'px';
+                }
+
+                this.parent.$el.addClass('show_items');
+                this.$el.toggleClass('active');
+                this.$smallEl.toggleClass('active');
+
+            }.bind(this);
 
             this.model.bind('change', this.render, this);
+            this.smallEl.addEventListener('click', this.smallElClick);
         },
 
         clickTitle: function () {
-            this.$el.toggleClass('disable');
+            this.$el.toggleClass('active');
         },
 
         clickRemoveTodo: function () {
