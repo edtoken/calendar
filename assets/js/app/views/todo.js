@@ -29,6 +29,9 @@ define([
             this.smallEl.className = 'todoSmallItem item_' + this.model.cid;
             this.parent = options.parent;
 
+            /**
+             * click small title
+             */
             this.smallElClick = function(){
 
                 $('.monthDay').not(this.parent.el).removeClass('show_items');
@@ -75,7 +78,6 @@ define([
         },
 
         removeCustom: function () {
-            //this.parent.elCounter.innerHTML.replace(/[0-9]*/, value);
             this.smallEl.removeEventListener('click', this.smallElClick);
             this.smallEl.remove(this.smallEl.selectedIndex);
         }
