@@ -56,19 +56,23 @@ define([
 
             var item,
                 view;
+
             var openSmall = false;
+            var eventNode = false;
 
             if (e.target.className.indexOf('monthDay') >= 0) {
-
-                item = e.target.id.replace('monthDay_', '').split('_');
-                view = this.children['day_' + item[0] + '_' + item[1]];
-
+                eventNode = e.target;
             } else if (e.target.className.indexOf('todoSmallItem') >= 0) {
-
-                item = e.currentTarget.id.replace('monthDay_', '').split('_');
-                view = this.children['day_' + item[0] + '_' + item[1]];
+                eventNode = e.currentTarget;
                 openSmall = e.target.id.replace('todoSmall_', '');
             }
+
+            if (!eventNode) {
+                return false;
+            }
+
+            item = eventNode.id.replace('monthDay_', '').split('_');
+            view = this.children['day_' + item[0] + '_' + item[1]];
 
             if (view && view.openDay) {
                 view.openDay(openSmall);
