@@ -68,7 +68,7 @@ define([
             }
 
             var data = {};
-            data.description = this.el.querySelector('textarea').value;
+            data.description = this.el.querySelector('textarea').value.trim();
             if(!data.description || !data.description.split(' ').join('')){
                 alert('incorrect data');
                 return false;
