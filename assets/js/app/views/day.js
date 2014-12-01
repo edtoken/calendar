@@ -70,13 +70,10 @@ define([
             }
 
             var data = {};
-            var dataArray = this.$elAddForm.serializeArray();
-            for (var n in dataArray) {
-                if (dataArray[n].value === '') {
-                    alert('not valid data');
-                    return false;
-                }
-                data[dataArray[n].name] = dataArray[n].value;
+            data.description = this.el.querySelector('textarea').value;
+            if(!data.description || !data.description.split(' ').join('')){
+                alert('incorrect data');
+                return false;
             }
 
             data.date = this.options.modelData.date;
