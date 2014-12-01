@@ -338,7 +338,7 @@ body {
 .todoAddForm {
   margin-top: 10px;
 
-  input,
+  input[type="text"],
   textarea {
     resize: none;
     margin-top: 3px;
@@ -356,10 +356,10 @@ body {
     height: 98px;
   }
 
-  button {
+  input[type="submit"] {
     text-align: center;
     width: 100%;
-    font-family: "HelveticaLTStd-Bold";
+    font-family: 'HelveticaLTStd-Bold';
     border: 0;
     outline: none;
     color: #8991a2;

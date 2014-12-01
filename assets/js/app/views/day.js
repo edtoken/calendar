@@ -23,7 +23,7 @@ define([
         },
 
         events: {
-            'submit': 'saveNewItem'
+            //"submit": "saveNewItem"
         },
 
         initialize: function (options) {
