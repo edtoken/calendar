@@ -78,11 +78,7 @@ define([
             data.month = this.options.modelData.month;
             data.year = this.options.modelData.year;
 
-            data.title = data.description.substr(0,8).trim();
-
-            if(data.title.length >= 6){
-                data.title += '...';
-            }
+            data.title = data.description.substr(0,16).trim();
 
             this.app.collections.todos.create(data);
         },

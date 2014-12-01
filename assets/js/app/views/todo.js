@@ -67,12 +67,22 @@ define([
         },
 
         renderTitle: function () {
-            this.smallEl.innerHTML = this.model.escape('title');
+
+            var title = this.model.escape('title').substr(0, 8).trim();
+            if(title.length >= 6){
+                title += '...';
+            }
+
+            this.smallEl.innerHTML = title;
             return this;
         },
 
         render: function () {
             var data = this.model.toJSON();
+            if(data.title.length === 16){
+                data.title += '...';
+            }
+
             this.el.innerHTML = _.template(todoTpl)(data);
             return this;
         },
