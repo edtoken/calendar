@@ -60,10 +60,8 @@ define([
                     var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
                     this.elHiddenItemsWrap.style.top = -top + 'px';
                 }else{
-                    for(var n in this.children){
-                        this.children[n].el.classList.remove('active');
-                        this.children[n].smallEl.classList.remove('active');
-                    }
+                    $('.todoWrap').removeClass('active');
+                    $('.todoSmallItem').removeClass('active');
                 }
 
             }
