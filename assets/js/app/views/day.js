@@ -47,19 +47,20 @@ define([
             this.app.collections.todos.bind('add', this.addItem, this);
         },
 
-        openDay:function(openTodo){
+        openDay: function (openTodo) {
 
             $('.monthDay').not(this.el).removeClass('show_items');
-            this.$el.toggleClass('show_items');
             $('.todoWrap').removeClass('active');
             $('.todoSmallItem').removeClass('active');
 
-            if(this.el.className.indexOf('show_items') >= 0){
+            this.$el.toggleClass('show_items');
+
+            if (this.el.className.indexOf('show_items') >= 0) {
                 var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
                 this.elHiddenItemsWrap.style.top = -top + 'px';
             }
 
-            if(openTodo && this.el.className.indexOf('show_items') >= 0 && this.children[openTodo]){
+            if (openTodo && this.el.className.indexOf('show_items') >= 0 && this.children[openTodo]) {
                 this.children[openTodo].$el.addClass('active');
                 this.children[openTodo].$smallEl.addClass('active');
             }
@@ -74,7 +75,7 @@ define([
             var data = {};
             data.description = this.el.querySelector('textarea').value.trim();
 
-            if(!data.description || !data.description.split(' ').join('')){
+            if (!data.description || !data.description.split(' ').join('')) {
                 alert('incorrect data');
                 return false;
             }
@@ -82,7 +83,7 @@ define([
             data.date = this.options.modelData.date;
             data.month = this.options.modelData.month;
             data.year = this.options.modelData.year;
-            data.title = data.description.substr(0,16).trim();
+            data.title = data.description.substr(0, 16).trim();
             this.app.collections.todos.create(data);
         },
 
@@ -122,16 +123,16 @@ define([
             this.elhiddenItemsNode = this.el.querySelector('.hiddenItemsNode');
 
             if (this.children) {
-                for(var n in this.children){
+                for (var n in this.children) {
                     this.children[n].remove();
                 }
             }
 
             this.children = {};
 
-            for (var i=0;i<items.length;i++) {
+            for (var i = 0; i < items.length; i++) {
                 var TodoView = new TodoViewClass({model: items[i], parent: this});
-                if(i < 3){
+                if (i < 3) {
                     this.elItems.appendChild(TodoView.renderTitle().smallEl);
                 }
 

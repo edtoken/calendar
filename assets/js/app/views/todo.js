@@ -36,7 +36,7 @@ define([
             //this.model.bind('destroy', this.removeCustom, this);
         },
 
-        clickTitle:function(){
+        clickTitle: function () {
             this.$el.toggleClass('active');
             this.$smallEl.toggleClass('active');
         },
@@ -54,7 +54,7 @@ define([
         renderTitle: function () {
 
             var title = this.model.escape('title').substr(0, 8).trim();
-            if(title.length >= 6){
+            if (title.length >= 6) {
                 title += '...';
             }
 
@@ -65,7 +65,7 @@ define([
         render: function () {
 
             var data = this.model.toJSON();
-            if(data.title.length >= 15){
+            if (data.title.length >= 15) {
                 data.title += '...';
             }
 

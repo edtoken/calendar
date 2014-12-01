@@ -58,19 +58,19 @@ define([
                 view;
             var openSmall = false;
 
-            if(e.target.className.indexOf('monthDay') >= 0){
+            if (e.target.className.indexOf('monthDay') >= 0) {
 
                 item = e.target.id.replace('monthDay_', '').split('_');
-                view = this.children['day_'+ item[0] + '_' + item[1]];
+                view = this.children['day_' + item[0] + '_' + item[1]];
 
-            }else if(e.target.className.indexOf('todoSmallItem') >= 0){
+            } else if (e.target.className.indexOf('todoSmallItem') >= 0) {
 
                 item = e.currentTarget.id.replace('monthDay_', '').split('_');
-                view = this.children['day_'+ item[0] + '_' + item[1]];
+                view = this.children['day_' + item[0] + '_' + item[1]];
                 openSmall = e.target.id.replace('todoSmall_', '');
             }
 
-            if(view && view.openDay){
+            if (view && view.openDay) {
                 view.openDay(openSmall);
             }
         },
@@ -92,7 +92,7 @@ define([
             this.children = {};
 
             for (var n in days) {
-                var DayView = new DayViewClass({modelData: days[n], parent:this});
+                var DayView = new DayViewClass({modelData: days[n], parent: this});
                 this.el.appendChild(DayView.render().el);
                 this.children['day_' + days[n].month + '_' + days[n].date] = DayView;
             }
