@@ -79,9 +79,11 @@ define([
 
         render: function () {
             var data = this.model.toJSON();
-            if(data.title.length === 16){
+            if(data.title.length >= 15){
                 data.title += '...';
             }
+
+            console.log('d', data.title);
 
             this.el.innerHTML = _.template(todoTpl)(data);
             return this;
