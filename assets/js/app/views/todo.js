@@ -67,12 +67,15 @@ define([
         },
 
         renderTitle: function () {
-            this.smallEl.innerHTML = this.model.get('title');
+            this.smallEl.innerHTML = this.model.escape('title');
             return this;
         },
 
         render: function () {
+            //var data = {};
             var data = this.model.toJSON();
+            //data.title = this.model.escape('title');
+            //data.description = this.model.escape('description');
             this.el.innerHTML = _.template(todoTpl)(data);
             return this;
         },
