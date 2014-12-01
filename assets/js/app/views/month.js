@@ -34,7 +34,7 @@ define([
             var month = this.model.get("month");
             if (month <= 0) {
                 month = 12;
-                year = year - 1;
+                year--;
             }
             this.app.router.navigate('#/' + year + '/' + month);
 
@@ -46,7 +46,7 @@ define([
             var month = this.model.get("month") + 2;
             if (month > 12) {
                 month = 1;
-                year = year + 1;
+                year++;
             }
             this.app.router.navigate('#/' + year + '/' + month);
         },

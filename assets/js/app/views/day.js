@@ -5,13 +5,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'models/day',
     'views/todo',
     'text!templates/day.html'
 ], function ($,
              _,
              Backbone,
-             DayModelClass,
              TodoViewClass,
              dayTpl) {
 
@@ -32,7 +30,6 @@ define([
         initialize: function (options) {
 
             var self = this;
-            //this.model = new DayModelClass(options.modelData);
             this.options = options;
             this.options.modelData = options.modelData;
             this.children = {};
@@ -51,6 +48,7 @@ define([
         },
 
         clickEvent: function (e) {
+
             if (e.target === this.el
                 || e.target.className.indexOf('itemsNode') >= 0
             ) {
@@ -92,7 +90,7 @@ define([
 
             if (item.get('date') === this.options.modelData.date
                 && item.get('year') === this.options.modelData.year
-                && item.get('month') == this.options.modelData.month
+                && item.get('month') === this.options.modelData.month
             ) {
                 this.render();
             }
@@ -117,7 +115,6 @@ define([
             }
 
             this.el.innerHTML = _.template(dayTpl)(this.options.modelData);
-            //this.elCounter = this.el.querySelector('.todosCount');
             this.elItems = this.el.querySelector('.itemsNode');
             this.elHiddenItemsWrap = this.el.querySelector('.hiddenItemsNodeWrap');
             this.elhiddenItemsNode = this.el.querySelector('.hiddenItemsNode');
