@@ -78,8 +78,9 @@ define([
             data.month = this.options.modelData.month;
             data.year = this.options.modelData.year;
 
-            data.title = data.description.substr(0,10);
-            if(data.title.length == 10){
+            data.title = data.description.substr(0,8).trim();
+
+            if(data.title.length >= 6){
                 data.title += '...';
             }
 
