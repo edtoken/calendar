@@ -45,6 +45,7 @@ define([
                 throw "incorrect data year:" + year + ' month:' + month;
             }
 
+            this.app.views.index.$el.addClass('preload');
             this.app.models.month.clear({silent: true});
             this.app.models.month.set({
                 date: openDate,

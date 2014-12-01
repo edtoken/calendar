@@ -16,6 +16,7 @@ define([
         el: $('body'),
 
         initialize: function () {
+            this.$el.addClass('preload');
             this.children = {};
             this.children.month = new MonthViewClass({parent: this});
             this.render();

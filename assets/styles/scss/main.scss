@@ -13,6 +13,19 @@
 
 body {
   background: url("#{$img_dir}bg.png");
+
+  &.preload:after
+  {
+    content:"";
+    display: block;
+    position: fixed;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    background:url("#{$img_dir}preloader.gif") rgba(0,0,0,0.5) no-repeat center;
+    z-index: 100;
+  }
 }
 
 .monthViewWrap {
@@ -346,7 +359,7 @@ body {
     &:hover {
       background: #ccced2;
     }
-    
+
     @include border-radius($basic_radius);
   }
 }

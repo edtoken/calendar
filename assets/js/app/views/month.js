@@ -101,6 +101,8 @@ define([
                 this.children['day_' + days[n].month + '_' + days[n].date] = DayView;
             }
 
+            this.app.views.index.$el.removeClass('preload');
+
             return this;
         }
     });
