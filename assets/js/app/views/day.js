@@ -121,8 +121,8 @@ define([
             this.elItems = this.el.querySelector('.itemsNode');
             this.elHiddenItemsWrap = this.el.querySelector('.hiddenItemsNodeWrap');
             this.elhiddenItemsNode = this.el.querySelector('.hiddenItemsNode');
-            this.elAddForm = this.el.querySelector('.todoAddForm');
-            this.$elAddForm = $(this.elAddForm);
+            //this.elAddForm = this.el.querySelector('.todoAddForm');
+            //this.$elAddForm = $(this.elAddForm);
 
             if (this.children) {
                 for(var n in this.children){
