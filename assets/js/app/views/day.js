@@ -56,8 +56,16 @@ define([
                 $('.monthDay').not(this.el).removeClass('show_items');
                 this.$el.toggleClass('show_items');
 
-                var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
-                this.elHiddenItemsWrap.style.top = -top + 'px';
+                if(this.el.className.indexOf('show_items') >= 0){
+                    var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
+                    this.elHiddenItemsWrap.style.top = -top + 'px';
+                }else{
+                    for(var n in this.children){
+                        this.children[n].el.classList.remove('active');
+                        this.children[n].smallEl.classList.remove('active');
+                    }
+                }
+
             }
         },
 

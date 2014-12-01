@@ -13,7 +13,8 @@ define([
              MonthModelClass,
              IndexViewClass) {
 
-    //Backbone.Collection.prototype.sync = BackboneLocalStorage.sync;
+
+    NodeList.prototype.forEach = Array.prototype.forEach;
 
     /**
      * Backbone.View extend
