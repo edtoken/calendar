@@ -23,7 +23,6 @@ define([
         },
 
         events: {
-            'click': 'clickEvent',
             'submit': 'saveNewItem'
         },
 
@@ -31,6 +30,7 @@ define([
 
             var self = this;
             this.options = options;
+            this.parent = options.parent;
             this.options.modelData = options.modelData;
             this.children = {};
 
@@ -47,23 +47,21 @@ define([
             this.app.collections.todos.bind('add', this.addItem, this);
         },
 
-        clickEvent: function (e) {
+        openDay:function(openTodo){
 
-            if (e.target === this.el
-                || e.target.className.indexOf('itemsNode') >= 0
-            ) {
+            $('.monthDay').not(this.el).removeClass('show_items');
+            this.$el.toggleClass('show_items');
+            $('.todoWrap').removeClass('active');
+            $('.todoSmallItem').removeClass('active');
 
-                $('.monthDay').not(this.el).removeClass('show_items');
-                this.$el.toggleClass('show_items');
+            if(this.el.className.indexOf('show_items') >= 0){
+                var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
+                this.elHiddenItemsWrap.style.top = -top + 'px';
+            }
 
-                if(this.el.className.indexOf('show_items') >= 0){
-                    var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;
-                    this.elHiddenItemsWrap.style.top = -top + 'px';
-                }else{
-                    $('.todoWrap').removeClass('active');
-                    $('.todoSmallItem').removeClass('active');
-                }
-
+            if(openTodo && this.el.className.indexOf('show_items') >= 0 && this.children[openTodo]){
+                this.children[openTodo].$el.addClass('active');
+                this.children[openTodo].$smallEl.addClass('active');
             }
         },
 
@@ -75,6 +73,7 @@ define([
 
             var data = {};
             data.description = this.el.querySelector('textarea').value.trim();
+
             if(!data.description || !data.description.split(' ').join('')){
                 alert('incorrect data');
                 return false;
@@ -83,9 +82,7 @@ define([
             data.date = this.options.modelData.date;
             data.month = this.options.modelData.month;
             data.year = this.options.modelData.year;
-
             data.title = data.description.substr(0,16).trim();
-
             this.app.collections.todos.create(data);
         },
 
@@ -117,12 +114,12 @@ define([
                 this.$el.addClass('right');
             }
 
+            this.el.id = 'monthDay_' + this.options.modelData.month + '_' + this.options.modelData.date;
+
             this.el.innerHTML = _.template(dayTpl)(this.options.modelData);
             this.elItems = this.el.querySelector('.itemsNode');
             this.elHiddenItemsWrap = this.el.querySelector('.hiddenItemsNodeWrap');
             this.elhiddenItemsNode = this.el.querySelector('.hiddenItemsNode');
-            //this.elAddForm = this.el.querySelector('.todoAddForm');
-            //this.$elAddForm = $(this.elAddForm);
 
             if (this.children) {
                 for(var n in this.children){
@@ -130,15 +127,16 @@ define([
                 }
             }
 
-            this.children = [];
+            this.children = {};
 
             for (var i=0;i<items.length;i++) {
                 var TodoView = new TodoViewClass({model: items[i], parent: this});
                 if(i < 3){
                     this.elItems.appendChild(TodoView.renderTitle().smallEl);
                 }
+
                 this.elhiddenItemsNode.appendChild(TodoView.render().el);
-                this.children.push(TodoView);
+                this.children[items[i].cid] = TodoView;
             }
 
             var top = (this.elHiddenItemsWrap.offsetHeight - this.el.offsetHeight) / 2;

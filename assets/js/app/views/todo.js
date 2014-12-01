@@ -26,34 +26,19 @@ define([
             this.smallEl = document.createElement('li');
             this.$smallEl = $(this.smallEl);
 
-            this.smallEl.className = 'todoSmallItem item_' + this.model.cid;
+            this.smallEl.className = 'todoSmallItem';
+            this.smallEl.id = 'todoSmall_' + this.model.cid;
+
             this.parent = options.parent;
 
-            /**
-             * click small title
-             */
-            this.smallElClick = function(){
-
-                $('.monthDay').not(this.parent.el).removeClass('show_items');
-
-
-                if(this.parent.el.className.indexOf('show_items') < 0){
-                    var top = (this.parent.elHiddenItemsWrap.offsetHeight - this.parent.el.offsetHeight) / 2;
-                    this.parent.elHiddenItemsWrap.style.top = top + 'px';
-                }
-
-                this.parent.$el.addClass('show_items');
-                this.$el.toggleClass('active');
-                this.$smallEl.toggleClass('active');
-
-            }.bind(this);
-
             this.model.bind('change', this.render, this);
-            this.smallEl.addEventListener('click', this.smallElClick);
+            //this.model.bind('destroy', this.remove, this);
+            //this.model.bind('destroy', this.removeCustom, this);
         },
 
-        clickTitle: function () {
+        clickTitle:function(){
             this.$el.toggleClass('active');
+            this.$smallEl.toggleClass('active');
         },
 
         clickRemoveTodo: function () {
@@ -84,12 +69,13 @@ define([
                 data.title += '...';
             }
 
+            this.el.id = 'todoFull_' + this.model.cid;
             this.el.innerHTML = _.template(todoTpl)(data);
             return this;
         },
 
         removeCustom: function () {
-            this.smallEl.removeEventListener('click', this.smallElClick);
+            //this.smallEl.removeEventListener('click', this.smallElClick);
             this.smallEl.remove(this.smallEl.selectedIndex);
         }
     });

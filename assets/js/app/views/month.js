@@ -20,7 +20,8 @@ define([
 
         events: {
             "click #js_MonthPrev": "getMonthPrev",
-            "click #js_MonthNext": "getMonthNext"
+            "click #js_MonthNext": "getMonthNext",
+            "click .monthDay": "clickDay"
         },
 
         initialize: function () {
@@ -51,6 +52,29 @@ define([
             this.app.router.navigate('#/' + year + '/' + month);
         },
 
+        clickDay: function (e) {
+
+            var item,
+                view;
+            var openSmall = false;
+
+            if(e.target.className.indexOf('monthDay') >= 0){
+
+                item = e.target.id.replace('monthDay_', '').split('_');
+                view = this.children['day_'+ item[0] + '_' + item[1]];
+
+            }else if(e.target.className.indexOf('todoSmallItem') >= 0){
+
+                item = e.currentTarget.id.replace('monthDay_', '').split('_');
+                view = this.children['day_'+ item[0] + '_' + item[1]];
+                openSmall = e.target.id.replace('todoSmall_', '');
+            }
+
+            if(view && view.openDay){
+                view.openDay(openSmall);
+            }
+        },
+
         render: function () {
 
             var data = {};
@@ -59,17 +83,18 @@ define([
             var days = this.model.get('days');
 
             if (this.children) {
-                for(var n in this.children){
+                for (var n in this.children) {
                     this.children[n].remove();
                 }
             }
 
             this.el.innerHTML = _.template(monthTpl)(data);
-            this.children = [];
+            this.children = {};
 
             for (var n in days) {
-                var DayView = new DayViewClass({modelData: days[n]});
+                var DayView = new DayViewClass({modelData: days[n], parent:this});
                 this.el.appendChild(DayView.render().el);
+                this.children['day_' + days[n].month + '_' + days[n].date] = DayView;
             }
 
             return this;
