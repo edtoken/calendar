@@ -35,13 +35,8 @@ body {
   height: 70px;
   line-height: 70px;
 
-  background: #ffffff;
-  background: -moz-linear-gradient(top, #ffffff 0%, #e4e6ec 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #e4e6ec));
-  background: -webkit-linear-gradient(top, #ffffff 0%, #e4e6ec 100%);
-  background: -o-linear-gradient(top, #ffffff 0%, #e4e6ec 100%);
-  background: -ms-linear-gradient(top, #ffffff 0%, #e4e6ec 100%);
-  background: linear-gradient(to bottom, #ffffff 0%, #e4e6ec 100%);
+
+  @include gradient-vertical(#ffffff, #e4e6ec);
 
   & > span {
     font-size: 28px;
@@ -54,7 +49,6 @@ body {
 .monthArrow {
 
   overflow: hidden;
-  background: transparent;
   position: absolute;
   top: 50%;
   margin-top: -16px;
@@ -67,14 +61,7 @@ body {
   outline: none;
   border: 0;
 
-  background: #bfc0c2;
-  background: -moz-linear-gradient(top, #bfc0c2 0%, #8f9194 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bfc0c2), color-stop(100%, #8f9194));
-  background: -webkit-linear-gradient(top, #bfc0c2 0%, #8f9194 100%);
-  background: -o-linear-gradient(top, #bfc0c2 0%, #8f9194 100%);
-  background: -ms-linear-gradient(top, #bfc0c2 0%, #8f9194 100%);
-  background: linear-gradient(to bottom, #bfc0c2 0%, #8f9194 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bfc0c2', endColorstr='#8f9194', GradientType=0);
+  @include gradient-vertical(#bfc0c2, #8f9194);
 
   &:hover {
     cursor: pointer;
@@ -119,15 +106,7 @@ body {
     height: 32px;
     z-index: 1;
 
-    background: #ffffff;
-    background: -moz-linear-gradient(top, #ffffff 0%, #e4e7ef 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #e4e7ef));
-    background: -webkit-linear-gradient(top, #ffffff 0%, #e4e7ef 100%);
-    background: -o-linear-gradient(top, #ffffff 0%, #e4e7ef 100%);
-    background: -ms-linear-gradient(top, #ffffff 0%, #e4e7ef 100%);
-    background: linear-gradient(to bottom, #ffffff 0%, #e4e7ef 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e4e7ef', GradientType=0);
-
+    @include gradient-vertical(#ffffff, #e4e7ef);
     @include border-radius(100%);
   }
 }
@@ -236,9 +215,7 @@ body {
 }
 
 .itemsNode {
-  //  height: 106px;
   width: 100%;
-  //  overflow: hidden;
 }
 
 .hiddenItemsNodeWrap {
@@ -336,12 +313,10 @@ body {
 }
 
 .todoAddForm {
-  margin-top: 10px;
 
   input[type="text"],
   textarea {
     resize: none;
-    margin-top: 3px;
     outline: none;
     padding: 7px;
     color: #3f3f3f;
@@ -371,6 +346,7 @@ body {
     &:hover {
       background: #ccced2;
     }
+    
     @include border-radius($basic_radius);
   }
 }
